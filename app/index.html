@@ -12,11 +12,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html lang="">
 
 <head>
+  <base href="/">
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Polymer Starter Kit" />
-  <title>Polymer Starter Kit</title>
+  <title>Runner Monitor</title>
   <!-- Place favicon.ico in the `app/` directory -->
 
   <!-- Chrome for Android theme color -->
@@ -74,20 +75,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <!-- Drawer Content -->
         <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
-          <a data-route="home" href="{{baseUrl}}">
-            <iron-icon icon="home"></iron-icon>
-            <span>Home</span>
-          </a>
 
-          <a data-route="users" href="users">
-            <iron-icon icon="info"></iron-icon>
-            <span>Users</span>
-          </a>
+          <template is="dom-if" if="{{!isLogged(currentUser)}}">
 
-          <a data-route="contact" href="contact">
-            <iron-icon icon="mail"></iron-icon>
-            <span>Contact</span>
-          </a>
+            <a data-route="login" href="login">
+              <iron-icon icon="login"></iron-icon>
+              <span>Connexion</span>
+            </a>
+
+          </template>
+
+          <template is="dom-if" if="{{isLogged(currentUser)}}">
+            <a data-route="home" href="{{baseUrl}}">
+              <iron-icon icon="home"></iron-icon>
+              <span>Accueil</span>
+            </a>
+
+            <a data-route="users" href="users">
+              <iron-icon icon="info"></iron-icon>
+              <span>Users</span>
+            </a>
+
+            <a data-route="diary" href="diary">
+              <iron-icon icon="book"></iron-icon>
+              <span>Journal</span>
+            </a>
+
+            <a data-route="contact" href="contact">
+              <iron-icon icon="mail"></iron-icon>
+              <span>Contact</span>
+            </a>
+
+            <a data-route="logout" href="logout">
+              <iron-icon icon="logout"></iron-icon>
+              <span>Déconnexion</span>
+            </a>
+          </template>
+
         </paper-menu>
       </paper-scroll-header-panel>
 
@@ -105,12 +129,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           <!-- Application name -->
           <div class="middle middle-container center horizontal layout">
-            <div class="app-name">Polymer Starter Kit</div>
+            <div class="app-name">Runner Monitor</div>
           </div>
 
           <!-- Application sub title -->
           <div class="bottom bottom-container center horizontal layout">
-            <div class="bottom-title paper-font-subhead">The future of the web today</div>
+            <div class="bottom-title paper-font-subhead">My athlete's best friend</div>
           </div>
 
         </paper-toolbar>
@@ -153,6 +177,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             </section>
 
+            <section data-route="login">
+              <paper-material elevation="1">
+                <h2 class="page-title">Login</h2>
+                <my-login id="loginForm" user="{{currentUser}}"></my-login>
+              </paper-material>
+            </section>
+
             <section data-route="users">
               <paper-material elevation="1">
                 <h2 class="page-title">Users</h2>
@@ -175,6 +206,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <paper-material elevation="1">
                 <h2 class="page-title">Contact</h2>
                 <p>This is the contact section</p>
+              </paper-material>
+            </section>
+
+            <section data-route="book">
+              <paper-material elevation="1">
+             <h2>Hello World!</h2>
               </paper-material>
             </section>
 
