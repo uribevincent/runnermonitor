@@ -1,0 +1,81 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<!--<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">-->
+<!--<link rel="import" href="../../bower_components/paper-shadow/paper-shadow.html">-->
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<!--<link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">-->
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+<link rel="import" href="../mark-down-master/mark-down.html">
+<link rel="import" href="../mark-down-master/mark-down-editor.html">
+
+<dom-module id="workbook-entry-editor">
+<link rel="import" type="css" href="workbook-entry-editor.css">
+<template>
+
+<iron-ajax  url="../../api/index.php/athletes/workbook/entry" method="POST" enctype="application/json"
+on-last-response="_setId" verbose="true" id="postAjax"></iron-ajax>
+
+<iron-ajax  url="{{entryRaces}}" handle-as="json" last-response="{{races}}"  auto id="ajax"
+></iron-ajax>
+
+<div >
+<div class="preview-title">Apercu</div>
+  <mark-down text="[[entry.text]]" class="preview"></mark-down>
+</div>
+<div end flex>
+<span horizontal layout >
+  <iron-selector class="list" attr-for-selected="label" selected="{{entry.feeling}}">
+    <paper-icon-button label="awesome" src="img/awesome.svg"></paper-icon-button>
+    <paper-icon-button label="good" src="img/good.svg"></paper-icon-button>
+    <paper-icon-button label="bad" src="img/bad.svg"></paper-icon-button>
+    <paper-icon-button label="hurt" src="img/hurt.svg"></paper-icon-button>
+</iron-selector>
+
+<iron-selector class="list" attr-for-selected="label" selected="{{entry.occupation}}">
+  <paper-icon-button label="workout" src="img/workout.svg"></paper-icon-button>
+  <paper-icon-button label="race" src="img/race.svg"></paper-icon-button>
+  <paper-icon-button label="rest" src="img/rest.svg"></paper-icon-button>
+</iron-selector>
+
+<iron-selector class="list" attr-for-selected="label" selected="{{entry.weather}}">
+  <paper-icon-button label="sun" src="img/sun.svg"></paper-icon-button>
+  <paper-icon-button label="cloud" src="img/cloud.svg"></paper-icon-button>
+  <paper-icon-button label="rain" src="img/rain.svg"></paper-icon-button>
+  <paper-icon-button label="storm" src="img/storm.svg"></paper-icon-button>
+  <paper-icon-button label="snow" src="img/snow.svg"></paper-icon-button>
+</iron-selector>
+
+</span>
+
+
+<span horizontal layout >
+                <iron-selector class="list" selected="{{entry.public}}">
+                    <paper-item>Public</paper-item>
+                    <paper-item>Coach</paper-item>
+                    </iron-selector><br>
+</span>
+
+<span horizontal layout id="raceField" hidden$="{{_hideRaces(entry.occupation)}}">
+<iron-selector class="list" selected="{{entry.public}}">
+                  <template is="dom-repeat" items="{{races}}" as="race" >
+                    <paper-item><span>{{race.name}}</span></paper-item>
+                  </template>
+      </iron-selector><br>
+</span>
+
+<iron-autogrow-textarea rows="5" bind-value="{{entry.text}}" >
+</iron-autogrow-textarea>
+</div>
+
+  <paper-button  type="submit" on-tap="save">      
+          <iron-icon icon="check"></iron-icon>   Enregistrer      
+        </paper-button>
+</div>
+
+</template>
+<script src="workbook-entry-editor.js"></script>
+</dom-module>

@@ -1,0 +1,37 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../rm-plan/plan-detail.html">
+<link href="../rm-utils/cookie-getter.html" rel="import"> 
+
+<!-- http://codepen.io/anon/pen/bNxxgK -->
+<dom-module id="week-workouts-timeline">
+   <link rel="import" type="css" href="week-workouts-timeline.css">
+  <template>
+
+<cookie-getter></cookie-getter>
+ <iron-ajax auto url="../../api/index.php/athletes/week" handle-as="json" id="ajax" last-response="{{workouts}}" 
+  ></iron-ajax>
+
+<section id="cd-timeline">
+ <template is="dom-repeat" items="{{workouts}}" as="workout">
+  <div class="cd-timeline-block">
+    <div class="cd-timeline-img">
+      <img src="img/run.svg" alt="Picture">
+    </div> <!-- cd-timeline-img -->
+    <div class="cd-timeline-content">
+      <h3>{{workout.day}}</h3>
+      <ul>
+      <template is="dom-repeat" items="{{workout.details}}" as="detail">
+        <li><plan-detail detail="{{detail}}" customized="true"></plan-detail></li>
+      </template>
+    </ul>
+    </div>
+  </div>
+ 
+  </template>
+</section>
+
+<content></content>
+  </template>
+  <script src="week-workouts-timeline.js"></script>
+</dom-module>

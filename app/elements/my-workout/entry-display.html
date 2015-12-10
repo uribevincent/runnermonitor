@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../moment-element/moment-import.html">
+<link rel="import" href="../mark-down-master/mark-down.html">
+
+<dom-module id="entry-display">
+    <style>
+      .title{
+        border-bottom: 1px solid #ddd;
+      }
+    </style>
+
+  <template>
+
+<section horizontal layout end-end class="title">
+<div>
+	<h2>{{entryDate}}</h2>
+</div>
+<div flex></div>
+<div>
+	  <iron-icon class="calendar-icon" src$="{{weatherIcon}}"></iron-icon>
+    <iron-icon class="calendar-icon" src$="{{occupationIcon}}"></iron-icon>
+    <iron-icon class="calendar-icon" src$="{{feelingIcon}}"></iron-icon>
+</div>
+</section>
+
+<section>
+	<mark-down text="{{entry.text}}"></mark-down>
+</section>
+  </template>
+  <script src="entry-display.js"></script>
+</dom-module>

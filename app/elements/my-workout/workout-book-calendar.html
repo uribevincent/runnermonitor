@@ -1,0 +1,73 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../moment-element/moment-import.html">
+<link rel="import" href="workbook-entry-editor.html">
+
+<dom-module id="workout-book-calendar">
+<link rel="import" type="css" href="workout-book-calendar.css">
+<template >
+
+<iron-ajax auto url="{{workbookUrl}}" handle-as="json" last-response="{{weeks}}" id="ajax"
+></iron-ajax>
+
+<!-- http://jsfiddle.net/CgXLa/4/
+http://codepen.io/altitudems/pen/HLFKx
+
+ -->
+<neon-animated-pages entry-animation="slide-from-right-animation" exit-animation="slide-left-animation" id="content" selected="0">
+
+<div class="calendar" hash="calendar">
+	<h1 class="month">
+	  <paper-icon-button icon="chevron-left"  on-tap="previousMonth"></paper-icon-button>
+	  <span>{{currentDate}}</span>
+	  <paper-icon-button icon="chevron-right"  on-tap="nextMonth"></paper-icon-button>
+
+	</h1>
+	<ol class="day-names">
+		<li>Lundi</li>
+		<li>Mardi</li>
+		<li>Mercredi</li>
+		<li>Jeudi</li>
+		<li>Vendredi</li>
+		<li>Samedi</li>
+		<li>Dimanche</li>
+	</ol>
+
+
+	<ol class="days">
+		<template is="dom-repeat" items="{{weeks}}" as="week">
+			<template is="dom-repeat" items="{{week.days}}" as="day">
+					<li on-tap="selectView" hidden$="{{!_hasIndex(day.index)}}">
+						<div class="date">{{day.index}}</div>
+							<div class="event {{day.occupation}}" hidden$="{{!day.hasActivity}}">
+			                    <iron-icon class="calendar-icon" src="{{_getIconPath(day.weather)}}"></iron-icon>
+			                    <iron-icon class="calendar-icon" src="{{_getIconPath(day.occupation)}}"></iron-icon>
+			                    <iron-icon class="calendar-icon" src="{{_getIconPath(day.feeling)}}"></iron-icon>
+							</div>
+					</li>
+
+					<li class="outside" hidden$="{{_hasIndex(day.index)}}">
+						<div class="date">{{day.index}}</div>
+					</li>
+
+			</template>
+		</template>
+	</ol>
+</div>
+
+<div >
+	<div class="layout vertical">
+		<div>
+			<h2>Compte-rendu du <span>{{fullDate}}</span></h2>
+		</div>
+		<div flex></div>
+
+	  <paper-icon-button icon="close"  on-tap="closeTapped"></paper-icon-button>
+	</div>
+<workbook-entry-editor id="editor" closeTapped="{{closeTapped}}"></workbook-entry-editor>
+</div>
+</template>
+<script src="workout-book-calendar.js"></script>
+</dom-module>

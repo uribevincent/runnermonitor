@@ -1,0 +1,41 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../rm-plan/plan-detail.html">
+<link href="../rm-utils/cookie-getter.html" rel="import"> 
+
+<dom-module id="today-workout">
+
+  <template>
+  
+<cookie-getter></cookie-getter>
+
+ <iron-ajax auto url="../../api/index.php/athletes/today" handle-as="json" last-response="{{workout}}" id="workoutAjax" on-response="loadAthletes" ></iron-ajax>
+ <iron-ajax url="../../api/index.php/athletes/whotorunwith" handle-as="json" last-response="{{athletes}}" id="workoutAthletes"
+  ></iron-ajax>
+      <h2>Séance du jour</h2>
+
+      <ul>
+      <template is="dom-repeat" items="{{workout.details}}" as="detail">
+        <li><plan-detail detail="{{detail}}" customized="true"></plan-detail></li>
+      </template>
+    </ul>
+   
+ <div on-tap="toggleAthletes" class="collapseButton" hidden$="{{hasNoAthletes}}">
+    <h4>Avec la même séance</h4>
+ </div>
+  <iron-collapse id="athletes">
+      <div class="layout horizontal start flex" >
+      <template is="dom-repeat" items="{{athletes}}" as="ath">
+          <div class="miniprofil layout vertical start center">
+            <img src="{{path2picture(ath.picture)}}" />
+            <p><span>{{ath.name}}</span><br/>
+            VMA de <span>{{ath.mas}}</span></p>
+          </div>
+      </template>
+      </div>
+</iron-collapse>
+
+  </template>
+  <script src="today-workout.js"></script>
+</dom-module>

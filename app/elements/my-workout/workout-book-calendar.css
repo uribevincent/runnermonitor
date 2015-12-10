@@ -1,0 +1,62 @@
+
+    .calendar {
+      padding: 3em;
+      border-radius: 10px;
+    }
+    .calendar .month {
+      margin-top: 0;
+      font-weight: normal;
+      font-size: 3em;
+      color: #003594;
+    }
+    .calendar ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .calendar ol li {
+      float: left;
+      color: #003594;
+      width: 14.28571%;
+    }
+    .calendar .day-names {
+      border-bottom: 1px solid #ddd;
+    }
+    .calendar .day-names li {
+      text-transform: uppercase;
+      margin-bottom: .5em;
+    }
+    .calendar .days li {
+      border-bottom: 1px solid #ddd;
+      min-height: 8em;
+    }
+    
+    .calendar .days li:hover {
+      background-color: #ccc;
+    }
+    .calendar .days li .date {
+      margin: .5em 0;
+    }
+
+    .calendar .days li .event {
+      background: #DC4405;
+      font-size: .75em;
+      padding: 2px;
+      line-height: 2em;
+      overflow: hidden;
+      border-radius: 5px;
+    }
+
+       .calendar .days li .event.race {
+      background: #DC4405;
+    }
+       .calendar .days li .event.rest {
+      background: red;
+    }
+       .calendar .days li .event.workout {
+      background: yellow;
+    }
+    
+.calendar .days li.outside .date {
+  color: #ddd;
+}

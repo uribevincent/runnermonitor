@@ -1,0 +1,22 @@
+.preview{
+  min-height: 150px;
+  border: solid 1px #ddd
+}
+.preview-title{
+    display: block;
+  text-align: right;
+  color: #ccc;
+    font-style: italic;
+}
+
+.list {
+  display: block;
+  list-style: none;
+}
+
+.list > *{
+  border-bottom: 3px solid transparent;
+}
+.list > .iron-selected {
+  border-bottom: 3px solid #DC4405;
+}

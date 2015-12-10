@@ -78,11 +78,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     app.$.paperDrawerPanel.closeDrawer();
   };
 
-  app.isLogged = function(user){
+  app.isLogged = function(user) {
     return user !== null;
   };
 
-  app.logout = function(){
+  app.logout = function() {
     app.$.loginForm.logout();
   };
 

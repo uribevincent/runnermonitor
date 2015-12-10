@@ -11,13 +11,12 @@
     "paper-menu": "PolymerElements/paper-menu#4fecb43601",
     "firebase-element": "GoogleWebComponents/firebase-element#~1.0.9",
     "paper-input": "PolymerElements/paper-input#~1.1.2",
-    "paper-button": "PolymerElements/paper-button#~1.0.10"
+    "marked-element": "PolymerElements/marked-element#1.0.0",
+    "paper-button": "PolymerElements/paper-button#~1.0.10",
+    "paper-menu": "PolymerElements/paper-menu#~1.2.0"
   },
   "devDependencies": {
     "web-component-tester": "*"
   },
-  "ignore": [],
-  "resolutions": {
-    "paper-menu": "4fecb43601"
-  }
+  "ignore": []
 }
